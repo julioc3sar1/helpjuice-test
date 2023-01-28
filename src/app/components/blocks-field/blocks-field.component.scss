@@ -1,0 +1,23 @@
+.block_input{
+    &.form-control{
+        font-size: auto;
+    }
+    &.h1{
+        font-size: 2.5rem !important;
+    }
+    &.h2{
+        font-size: 2rem !important;
+    }
+}
+.blocks{
+    display: none;
+    width: 300px;
+    min-height: 350px;
+    position: absolute;
+    left: 0;
+    top: calc(100% + 5px);
+    box-shadow: 4px 4px 10px #f3f3f3;
+    &.active{
+        display: block;
+    }
+}

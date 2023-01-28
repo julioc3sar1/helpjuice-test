@@ -1,0 +1,43 @@
+<div>
+    <app-blocks [blocks]="blocks"></app-blocks>
+    <div class="position-relative">
+        <input 
+        type="text" 
+        class="block_input form-control border-0 px-0 {{selectedBlock ? selectedBlock.type : ''}}" 
+        placeholder="{{selectedBlock ? selectedBlock.name : 'Type / for blocks, @ to link docs or people'}}"
+        [(ngModel)]="blockValue"
+        (keyup)="typing($event)"
+        >
+        <div class="blocks card border {{active ? 'active' : ''}}">
+            <div class="p-2">
+                <h6 class="mb-1">Add blocks</h6>
+                <p class="text-secondary"><small>Keep typing o filter, or escape to exit</small></p>
+                <p>
+                    <small class="me-1">Filtering keyword</small>
+                    <span class="badge bg-primary">{{getFilteringKeyword()}}</span>
+                </p>
+            </div>
+            <div class="list-group rounded-0 border-0" *ngIf="getFilteredBlockTypes(getFilteringKeyword()).length>0; else noBlocks">
+                <button 
+                *ngFor="let block of getFilteredBlockTypes(getFilteringKeyword()); index as i;" 
+                type="button" 
+                class="list-group-item list-group-item-action border-0 d-flex align-items-center px-0" 
+                aria-current="true"
+                (click)="selectBlock(block)"
+                >
+                    <span class="fs-3 px-3">T</span>
+                    <span class="d-flex flex-column">
+                        <small class="fw-semibold">{{block.name}}</small>
+                        <small class="text-secondary">Shortcut: {{block.shortcut_text}}</small>
+                    </span>
+                </button>
+                <!-- <button type="button" class="list-group-item list-group-item-action">A third button item</button>
+                <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
+                <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button> -->
+            </div>
+            <ng-template #noBlocks>
+                <div class="text-center text-secondary">No blocks found</div>
+            </ng-template>
+        </div>
+    </div>
+</div>
